@@ -46,15 +46,40 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart"
+           data-product-id="${product.id}"> 
             Add to Cart
           </button>
         </div>`
        
 })
-
-console.log(productsHTML)  
+  
 
 document.querySelector('.js-products-grid')    // using DOM to get html element by elementsclass name and changing the innnrHTML property with our generated sample code
  .innerHTML = productsHTML
 
+ document.querySelectorAll('.js-add-to-cart')
+  .forEach((button)=>{
+    button.addEventListener('click',()=>{
+      const productId = button.dataset.productId;
+
+      // check item already in cart or not
+      let matchingItem;    // returns truthy/Falsy value
+
+      cart.forEach((item)=>{        // looping thr an arrow to check item already there or not
+        if(productId === item.productId){     // if item there in cart list as an object
+          matchingItem = item                  // store the matching item in seprate variable
+        }
+      });
+
+      if (matchingItem){             // if matchingItem is truthy
+        matchingItem.quantity ++     // increase the matching product quuantity +1
+      } else {                       // else push the product object(productId , quantity) in cart array
+        cart.push({
+          productId: productId,
+          quantity: 1
+        })
+      }
+      console.log(cart)
+    })
+  })
