@@ -10,8 +10,8 @@
 
     <!-- Load a font called Roboto from Google Fonts. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
 
     <!-- Here are the CSS files for this page. -->
     <link rel="stylesheet" href="styles/shared/general.css">
@@ -56,8 +56,10 @@
       </div>
     </div>
 
+    <!-- script elements are loaded one by one so order of scripts matters -->
 
+    <script src="data/products.js"></script>   
     <script src="scripts/amazon.js"></script>
-            
+         
   </body>
 </html>
