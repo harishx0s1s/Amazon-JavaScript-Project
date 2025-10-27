@@ -10,7 +10,7 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
 
           <div class="product-name limit-text-to-2-lines">
             ${product.name}
-          </div>
+          </div>           
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
@@ -52,7 +52,7 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
           </button>
         </div>`
        
-})
+})       
   
 
 document.querySelector('.js-products-grid')    // using DOM to get html element by elementsclass name and changing the innnrHTML property with our generated sample code
@@ -80,6 +80,13 @@ document.querySelector('.js-products-grid')    // using DOM to get html element 
           quantity: 1
         })
       }
-      console.log(cart)
+      
+      let cartQuantity = 0
+      cart.forEach((item)=>{
+        cartQuantity += item.quantity
+      })
+      
+      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
     })
   })
+
