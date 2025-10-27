@@ -25,7 +25,7 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
           </div>
 
           <div class="product-quantity-container">
-            <select class="js-quantity-selector-${product.id}">
+            <select>
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -72,20 +72,15 @@ document.querySelector('.js-products-grid')    // using DOM to get html element 
         }
       });
 
-      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`)
-
-      const quantity = Number(quantitySelector.value)
-
       if (matchingItem){             // if matchingItem is truthy
-        matchingItem.quantity += quantity     // increase the matching product quuantity +1
+        matchingItem.quantity ++     // increase the matching product quuantity +1
       } else {                       // else push the product object(productId , quantity) in cart array
         cart.push({
           productId: productId,
-          quantity: quantity
+          quantity: 1
         })
       }
-
-       
+      
       let cartQuantity = 0
       cart.forEach((item)=>{
         cartQuantity += item.quantity
