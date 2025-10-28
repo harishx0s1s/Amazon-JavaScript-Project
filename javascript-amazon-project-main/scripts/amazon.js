@@ -1,4 +1,6 @@
 import {cart} from '../data/cart.js'
+import { products } from '../data/products.js';
+
 let productsHTML = '';                                // we are using acumalator pattern here its just creating a variable to store a value ffor later use after looping thr an array
 
 products.forEach((product,index)=>{                    // we are loop thr an array by using forEach() so that we can get elements in array one by one medjing value with html 
