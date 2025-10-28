@@ -1,3 +1,4 @@
+import {cart} from '../data/cart.js'
 let productsHTML = '';                                // we are using acumalator pattern here its just creating a variable to store a value ffor later use after looping thr an array
 
 products.forEach((product,index)=>{                    // we are loop thr an array by using forEach() so that we can get elements in array one by one medjing value with html 
@@ -41,7 +42,7 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -58,10 +59,32 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
 document.querySelector('.js-products-grid')    // using DOM to get html element by elementsclass name and changing the innnrHTML property with our generated sample code
  .innerHTML = productsHTML
 
+ const addedMessageTimeouts = {};
+
  document.querySelectorAll('.js-add-to-cart')
   .forEach((button)=>{
     button.addEventListener('click',()=>{
-      const productId = button.dataset.productId;
+
+      const {productId} = button.dataset;
+
+      document.querySelector(`.js-added-to-cart-${productId}`).classList.add('after-added-to-cart')
+
+      const previusTimeoutId = addedMessageTimeouts[productId]
+
+      if (previusTimeoutId){
+        clearTimeout(previusTimeoutId)
+      };
+
+      const timeoutId = setTimeout(()=>{
+        document.querySelector(`.js-added-to-cart-${productId}`).classList.remove('after-added-to-cart')
+      },2000)
+
+      addedMessageTimeouts[productId] = timeoutId
+
+
+
+
+
 
       // check item already in cart or not
       let matchingItem;    // returns truthy/Falsy value
@@ -80,8 +103,8 @@ document.querySelector('.js-products-grid')    // using DOM to get html element 
         matchingItem.quantity += quantity     // increase the matching product quuantity +1
       } else {                       // else push the product object(productId , quantity) in cart array
         cart.push({
-          productId: productId,
-          quantity: quantity
+          productId,         //productId: productId,
+          quantity             // quantity: quantity
         })
       }
 
