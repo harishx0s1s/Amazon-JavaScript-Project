@@ -1,6 +1,7 @@
 // import * as cartModule from 'file path'  eg. cartModule.cart, cartModule.addToCart
 import {cart, addToCart, updateCartQuantity} from '../data/cart.js'
 import { products } from '../data/products.js';
+import { formatCurrency } from './utils/money.js';
 
 let productsHTML = '';                                // we are using acumalator pattern here its just creating a variable to store a value ffor later use after looping thr an array
 
@@ -25,7 +26,7 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
           </div>
 
           <div class="product-price">
-            $${(product.priceCents/100).toFixed(2)}
+            $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
