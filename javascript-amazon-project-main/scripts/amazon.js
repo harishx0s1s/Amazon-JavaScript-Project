@@ -100,3 +100,5 @@ document.querySelector('.js-products-grid')    // using DOM to get html element 
     })
   })
 
+  updateCartQuantity()
+
