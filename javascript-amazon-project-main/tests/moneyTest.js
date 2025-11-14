@@ -1,4 +1,4 @@
-import {formatCurrency} from "../javascript-amazon-project-main/scripts/utils/money.js"
+import {formatCurrency} from "../scripts/utils/money.js"
 
 // writing code to test code - test cases
 
