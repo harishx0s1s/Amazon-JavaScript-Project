@@ -17,6 +17,9 @@ describe('test suits: FormatCurrency',()=>{
   }),
   it('round downs to nearest num',()=>{
     expect(formatCurrency(2000.4)).toEqual('20.00')
+  }),
+  it('works with negatives',()=>{
+    expect(formatCurrency(-500)).toEqual('-5.00')
   })
 })
 
