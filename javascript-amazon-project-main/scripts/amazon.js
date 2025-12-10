@@ -27,7 +27,7 @@ products.forEach((product,index)=>{                    // we are loop thr an arr
 
           <div class="product-price">
             $${product.getPrice()}
-          </div>
+          </div> 
 
           <div class="product-quantity-container">
             <select class="js-quantity-selector-${product.id}">

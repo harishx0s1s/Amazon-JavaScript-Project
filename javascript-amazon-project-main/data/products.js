@@ -15,7 +15,7 @@ export function getProduct(productId){
 
 // defining class to create objects
 
-class Product{
+export class Product{
   id;
   image;
   name;           // undefined variables
@@ -43,7 +43,7 @@ class Product{
   }
 }
 
-class Clothing extends Product{
+export class Clothing extends Product{
   sizeChartLink;
 
   constructor(productDetails){
@@ -55,6 +55,21 @@ class Clothing extends Product{
     // super function helps to reuse the parent class methods or property
     //super.extraInfoHTML();
     return `<a href="${this.sizeChartLink}" target="_blank">Size Chart</a>`
+  }
+}
+
+export class Appliance extends Product{
+  instructionsLink;
+  warrantyLink;
+  constructor(productDetails){
+    super(productDetails)
+    this.instructionsLink = productDetails.instructionsLink
+    this.warrantyLink = productDetails.warrantyLink
+  }
+
+  extraInfoHTML(){
+    return `<a href="${this.instructionsLink}" target="_blank">Instructions</a>
+    <a href="${this.warrantyLink}" target="_blank">Warrenty</a>`
   }
 }
 
@@ -139,7 +154,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -304,7 +322,7 @@ export const products = [
       stars: 4,
       count: 160
     },
-    priceCents: 1699,
+    priceCents: 1699,       
     keywords: [
       "shorts",
       "apparel",
@@ -324,7 +342,10 @@ export const products = [
       "water boiler",
       "appliances",
       "kitchen"
-    ]
+    ],
+    type: 'appliance',
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
@@ -759,6 +780,8 @@ export const products = [
 ].map((productDetails)=>{
   if(productDetails.type === 'clothing'){
     return new Clothing(productDetails)
+  } else if (productDetails.type === 'appliance'){
+    return new Appliance(productDetails)
   }
   return new Product(productDetails)
 });
