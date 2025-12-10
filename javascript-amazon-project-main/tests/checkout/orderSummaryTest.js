@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../data/cart.js";
-
+import { loadProducts }  from "../../data/products.js";
           //  Integration Test - tests many units/pieces of code working together
 
 describe('Test suite: renderOrderSummary',()=>{ 
@@ -15,6 +15,11 @@ describe('Test suite: renderOrderSummary',()=>{
   // afterAll() - runs code after all tests
 
   // these are the hooks function let as crete test in clea and easy way without duplicate codes 
+  beforeAll((done)=>{
+    loadProducts(()=>{
+      done()
+    })
+  })
 
   beforeEach(()=>{
     spyOn(localStorage, 'setItem')
@@ -39,6 +44,7 @@ describe('Test suite: renderOrderSummary',()=>{
         }
       ]);
     });
+   
     loadFromStorage();
     renderOrderSummary();
   })
