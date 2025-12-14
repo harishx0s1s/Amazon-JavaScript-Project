@@ -52,7 +52,7 @@ export class Clothing extends Product{
   }
 
   extraInfoHTML(){
-    // super function helps to reuse the parent class methods or property
+    // super function helps to reuse the parent class methods or property (method overiding)
     //super.extraInfoHTML();
     return `<a href="${this.sizeChartLink}" target="_blank">Size Chart</a>`
   }
@@ -106,6 +106,7 @@ export function loadProducts(fun){     // callback function which is used to cal
          return new Product(productDetails)
       }
     })
+    console.log("products loaded")
     fun()
   }) 
 
@@ -113,6 +114,20 @@ export function loadProducts(fun){     // callback function which is used to cal
   xhr.send()
 
 }
+
+let cartItems = []
+
+export function loadCart(fun){
+  const xhr = new XMLHttpRequest
+  xhr.addEventListener('load',()=>{
+    console.log(`this is from bacckend: ${xhr.response}`)
+    fun()
+  })
+  xhr.open('GET', 'https://supersimplebackend.dev/cart')
+  xhr.send()
+}
+
+
 
 
 
