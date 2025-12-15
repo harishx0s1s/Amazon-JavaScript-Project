@@ -3,6 +3,8 @@ import {renderPaymentSummary} from "./checkout/paymentSummary.js"
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js"
 import { loadProducts} from "../data/products.js"
 import { loadCart } from "../data/products.js"
+import { loadProductsFetch, loadCartFetch} from "../data/products.js"
+
 //import '../data/car.js'
 //import '../data/backend-practice.js'
 // import '../data/cart-class.js'
@@ -77,6 +79,8 @@ new Promise((resolve)=>{
 //   })
 // })
 
+/*
+
 Promise.all([
   new Promise((resolve)=>{
     loadProducts(()=>{             // asynchronize function
@@ -94,6 +98,31 @@ Promise.all([
   renderPaymentSummary()
   renderCheckoutHeader()
 }) 
+*/
+
+/*
+
+Promise.all([
+  new Promise((resolve)=>{
+    loadProducts(()=>{
+      resolve('load products')
+    })
+  }),
+
+  new Promise((resolve)=>{
+    loadCart(()=>{
+      resolve('load cart')
+    })
+  })
+]).then((values)=>{
+  console.log(values)
+  renderOrderSummary();
+  renderPaymentSummary();
+  renderCheckoutHeader();
+
+})
+
+*/
 
  //synchronized code runs immediately
 
@@ -124,3 +153,12 @@ new Promise((resolve)=>{
 
 
 // console.log(isSatSun(dayjs().add(7,'days')))
+
+Promise.all([
+  loadProductsFetch(),
+  loadCartFetch()
+]).then(()=>{
+  renderOrderSummary()
+  renderPaymentSummary()
+  renderCheckoutHeader()
+})

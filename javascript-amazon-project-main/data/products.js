@@ -90,8 +90,56 @@ export class Appliance extends Product{
 
 // logThis.call('hii')
 
-
+          
 export let products = []
+
+// fetch is an better aternative to XMLRequest (backend call)
+
+export function loadProductsFetch(){
+  const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
+    return response.json();
+  }).then((productsData)=>{
+    products = productsData.map((productDetails)=>{
+      if (productDetails.type === 'clothing'){
+        return new Clothing(productDetails)
+      } else if (productDetails.type === 'appliance'){
+        return new Appliance(productDetails)
+      } else {
+        return new Product(productDetails)
+      }
+    })
+
+    console.log('load products')
+  });
+
+  return promise
+}
+
+
+
+export function loadCartFetch(){
+  fetch('https://supersimplebackend.dev/cart')
+  .then((response)=>{
+    console.log(`this is from backend1: ${response}`)
+  })
+}
+
+/*
+loadProductsFetch().then(()=>{
+  console.log("products loaded using fetch")
+})
+*/
+
+
+
+/*
+
+loadProductsFetch().then(()=>{
+  console.log("Next step")
+})
+
+*/
+
 
 export function loadProducts(fun){     // callback function which is used to call a function in future
   const xhr = new XMLHttpRequest
@@ -114,6 +162,7 @@ export function loadProducts(fun){     // callback function which is used to cal
   xhr.send()
 
 }
+
 
 let cartItems = []
 
