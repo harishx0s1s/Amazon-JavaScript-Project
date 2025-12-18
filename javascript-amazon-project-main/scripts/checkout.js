@@ -151,9 +151,76 @@ new Promise((resolve)=>{
 */
 
 
+// aync wait example
+
+// async makes function return promise
+
+// function loadPage(){
+//   return new Promise((resolve)=>{
+//     console.log("page loaded")
+//     resolve()
+//   })
+// }
+
+// loadPage()
+
+// using async await
+
+// async function loadPage(){
+//   console.log("page loaded")
+
+//   loadCartFetch
+//   return 'harish'   // if we return somethingg from the function thats wraped by async it returns the resolve value we can catch it by then method
+// }
+
+// loadPage().then((name)=>{
+//   console.log(name)
+//   console.log("next step after page loaded")
+// })
+           // async wraps tha function and makes the function to return promise
+           // so we can use then method in async wrapped function
+           // we can make wait or dellay to asynchronize function to run by await 
+           // we only use await inside of sync function
+/*
+async function loadPage() {
+  console.log("load Page")
+
+  await loadProductsFetch()
+
+  return 'value2'
+}
+
+loadPage().then((value)=>{
+  console.log("next step")
+  console.log(value)
+})
+*/
+
+// loading page using async await with primise
+
+async function loadPage(){
+  await loadProductsFetch();
+  const value = await new Promise((resolve)=>{
+    loadCart(()=>{
+      resolve()
+    })
+  })
+
+  renderOrderSummary();
+  renderPaymentSummary();
+  renderCheckoutHeader();
+
+  return 'checkout page loaded'
+
+}
+loadPage().then((value)=>{
+  console.log(value)
+})
+
+
 
 // console.log(isSatSun(dayjs().add(7,'days')))
-
+/*
 Promise.all([
   loadProductsFetch(),
   loadCartFetch()
@@ -162,3 +229,4 @@ Promise.all([
   renderPaymentSummary()
   renderCheckoutHeader()
 })
+  */

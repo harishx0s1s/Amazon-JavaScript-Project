@@ -106,10 +106,10 @@ export function loadProductsFetch(){
         return new Appliance(productDetails)
       } else {
         return new Product(productDetails)
-      }
+      }  
     })
 
-    console.log('load products')
+    console.log(`this is from backend: products loaded`)
   });
 
   return promise
@@ -169,7 +169,7 @@ let cartItems = []
 export function loadCart(fun){
   const xhr = new XMLHttpRequest
   xhr.addEventListener('load',()=>{
-    console.log(`this is from bacckend: ${xhr.response}`)
+    console.log(`this is from backend: ${xhr.response}`)
     fun()
   })
   xhr.open('GET', 'https://supersimplebackend.dev/cart')
