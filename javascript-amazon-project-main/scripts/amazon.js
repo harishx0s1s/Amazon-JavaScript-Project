@@ -1,6 +1,6 @@
 // import * as cartModule from 'file path'  eg. cartModule.cart, cartModule.addToCart
 import {cart, addToCart, updateCartQuantity} from '../data/cart.js'
-import { products, loadProducts } from '../data/products.js';
+import { products, loadProducts, loadProductsFetch } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 // function initializePage(){
@@ -11,7 +11,23 @@ import { formatCurrency } from './utils/money.js';
 
 // initializePage()
 
-loadProducts(renderProuctsGrid)
+async function loadPage(){
+  try{
+    await loadProductsFetch()
+    renderProuctsGrid()
+    return 'amazon page'
+  } catch(error){
+      console.log("unexpecte error in loading amazon page")
+  }
+
+}
+
+loadPage().then((value)=>{
+  console.log(value)
+})
+
+
+//loadProducts(renderProuctsGrid)
 
 function renderProuctsGrid(){
   let productsHTML = '';                                // we are using acumalator pattern here its just creating a variable to store a value ffor later use after looping thr an array

@@ -197,25 +197,44 @@ loadPage().then((value)=>{
 */
 
 // loading page using async await with primise
+  
+// Error hanling in async await try{} catch{}
 
+// if you want to create an error in synchtronise code use throw
+// if you  want to create error in asynchronise code or create an error in future use reject inside promises
 async function loadPage(){
-  await loadProductsFetch();
-  const value = await new Promise((resolve)=>{
-    loadCart(()=>{
-      resolve()
-    })
-  })
+  try {
+    //throw 'error111'    // throw keyword uded to throw an error voluntearly which skips all the line in try block and go into catch block
 
+    await loadProductsFetch();
+
+    const value = await new Promise((resolve,reject)=>{
+      //throw 'error2'   // throw does not work in future instead we can give as second parameter with resolve
+      loadCart(()=>{
+        resolve()
+        //reject('error3')  // we can give reject inside promise to catch error in future
+      })
+    });
+
+  } catch(error) {
+    console.log(`Unexpected error cant render checkout page Error: ${error}`)
+  }
+
+  renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
-  renderCheckoutHeader();
-
-  return 'checkout page loaded'
-
 }
-loadPage().then((value)=>{
-  console.log(value)
-})
+
+loadPage();
+
+// catchin error using try/catch in reular or normal code 
+try{
+  doesNotExists();   // we catch the error if try block is fail or throw an error
+  console.log('next line')
+} catch(error){
+  console.log(error)
+}
+
 
 
 

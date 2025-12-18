@@ -110,10 +110,39 @@ export function loadProductsFetch(){
     })
 
     console.log(`this is from backend: products loaded`)
-  });
+  }).catch(()=>{
+    console.log("unexpected error in loading products. Please try agian later")
+  })
 
   return promise
 }
+
+/*
+   // error handling in Promises we use catch method in promise in order of catch the error
+  let products1 = []
+  function loadProductsFetch1(){
+    const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
+      return response.json();
+    }).then((productsData)=>{
+      products1 = productsData.map((productDetails)=>{
+        if(productDetails.type === 'clothing'){
+          return new Clothing(productDetails)
+        } else if (productDetails.type === 'appliance'){
+            return new Appliance(productDetails)
+        } else {
+          return new Product(productDetails)
+        }
+      })
+      console.log("product class is cretaed!")
+    }).catch((error)=>{
+      console.log(`Unexpected Error: ${error}. Please try again later`)
+    })
+
+    return promise
+  }
+  */
+
+ 
 
 
 
@@ -121,6 +150,8 @@ export function loadCartFetch(){
   fetch('https://supersimplebackend.dev/cart')
   .then((response)=>{
     console.log(`this is from backend1: ${response}`)
+  }).catch(()=>{
+    console.log("unexpected error: cant able to load cart")
   })
 }
 
@@ -162,6 +193,37 @@ export function loadProducts(fun){     // callback function which is used to cal
   xhr.send()
 
 }
+
+// trying error handling
+/*
+let products1 = []
+function loadProducts2(fun){
+  const xhr = new XMLHttpRequest
+  xhr.addEventListener('load',()=>{
+    products1 = JSON.parse(xhr.response)
+    products1 = products.map((productDetails)=>{
+      if (productDetails.type === 'clothing'){
+        return new Clothing(productDetails)
+      } else if (productDetails.type === 'appliance'){
+         return new Appliance(productDetails)
+      } else {
+        return new Product(productDetails)
+      }
+    })
+    fun()
+    console.log('products loaded 2')
+  });
+
+  xhr.addEventListener('error', (error)=>{
+    console.log(`unexpected error: ${error}, Please try again later`)
+  });
+
+  xhr.open('GET','https://supersimplebackend.dev/products')
+  xhr.send()
+}
+
+loadProducts2(()=>{})
+  */
 
 
 let cartItems = []
