@@ -2,6 +2,7 @@ import { cart } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
+import { addOrder } from "../../data/orders.js"; 
 
 export function renderPaymentSummary(){
 
@@ -66,7 +67,7 @@ export function renderPaymentSummary(){
             <div class="payment-summary-money">$${formatCurrency(totalCents)}</div>
           </div>
 
-          <button class="place-order-button button-primary">
+          <button class="place-order-button button-primary js-place-order">
             Place your order
           </button>
         </div>
@@ -74,5 +75,37 @@ export function renderPaymentSummary(){
 
    document.querySelector('.js-payment-summary')
       .innerHTML = paymentSummaryHTML
+    // there is four types of request we can perform on backend
+    // GET - get something from backend , POST - create something, PUT - update something, DELETE - delete something
+    // setting method type
+     // headers give the bbackend more info about out request
+     // what we giving to backend (must be in string)
+     // sending data to backend using feth with post method also using async await to handle asynchronise 
+     // using JSON.stringyfy() to stringyfy the data before sending to backend
+     
+    document.querySelector('.js-place-order')
+      .addEventListener('click',async ()=>{
+        try{
+          const response = await fetch('https://supersimplebackend.dev/orders',{
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              cart: cart
+            })
+          });
+
+          const order = await response.json()
+          addOrder(order)
+
+        } catch(error){
+          console.log('unexpected error. unable to place order')
+        }
+
+        window.location.href = 'orders.html'
+        
+        
+      })
 
 }

@@ -227,6 +227,8 @@ async function loadPage(){
 
 loadPage();
 
+/*
+
 // catchin error using try/catch in reular or normal code 
 try{
   doesNotExists();   // we catch the error if try block is fail or throw an error
@@ -234,6 +236,8 @@ try{
 } catch(error){
   console.log(error)
 }
+
+*/
 
 
 
