@@ -30,26 +30,25 @@ function saveToStorage(){
 
 
 export function addToCart(productId){
-    // check item already in cart or not
-    let matchingItem;    // returns truthy/Falsy value
+    
+    let matchingItem;    
 
-    cart.forEach((CartItem)=>{        // looping thr an arrow to check item already there or not
-      if(productId === CartItem.productId){     // if item there in cart list as an object
-        matchingItem = CartItem                 // store the matching item in seprate variable
+    cart.forEach((CartItem)=>{        
+      if(productId === CartItem.productId){     
+        matchingItem = CartItem               
       }
     });
 
-    // const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`)
-    // const quantity = Number(quantitySelector.value)
+
     
     const quantity = 1
 
-    if (matchingItem){             // if matchingItem is truthy
-      matchingItem.quantity += quantity     // increase the matching product quuantity +1
-    } else {                       // else push the product object(productId , quantity) in cart array
+    if (matchingItem){            
+      matchingItem.quantity += quantity  
+    } else {                      
       cart.push({
-        productId: productId,         //productId: productId,
-        quantity: quantity,            // quantity: quantity
+        productId: productId,        
+        quantity: quantity,           
         deliveryOptionId: '1'
       })
     }

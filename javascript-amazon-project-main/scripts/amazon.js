@@ -1,15 +1,8 @@
-// import * as cartModule from 'file path'  eg. cartModule.cart, cartModule.addToCart
 import {cart, addToCart, updateCartQuantity} from '../data/cart.js'
 import { products, loadProducts, loadProductsFetch } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
-// function initializePage(){
-//   loadProducts().then(()=>{
-//     renderProuctsGrid()
-//   })
-// }
 
-// initializePage()
 
 async function loadPage(){
   try{
@@ -27,14 +20,13 @@ loadPage().then((value)=>{
 })
 
 
-//loadProducts(renderProuctsGrid)
 
 function renderProuctsGrid(){
-  let productsHTML = '';                                // we are using acumalator pattern here its just creating a variable to store a value ffor later use after looping thr an array
+  let productsHTML = '';                                
 
   
   const url = new URL(window.location.href);
-  const search = url.searchParams.get('search')  // stores the value of parameter from url
+  const search = url.searchParams.get('search')  
 
   let filteredProducts = products
 
@@ -53,7 +45,7 @@ function renderProuctsGrid(){
   }
 
 
-  filteredProducts.forEach((product,index)=>{                    // we are loop thr an array by using forEach() so that we can get elements in array one by one medjing value with html 
+  filteredProducts.forEach((product,index)=>{                    
     productsHTML += `                                    
             <div class="product-container">
             <div class="product-image-container">
@@ -111,7 +103,7 @@ function renderProuctsGrid(){
   })       
     
 
-  document.querySelector('.js-products-grid')    // using DOM to get html element by elementsclass name and changing the innnrHTML property with our generated sample code
+  document.querySelector('.js-products-grid')   
   .innerHTML = productsHTML
 
 

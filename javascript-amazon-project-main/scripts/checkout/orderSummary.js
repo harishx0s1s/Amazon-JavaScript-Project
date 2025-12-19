@@ -124,13 +124,8 @@ export function renderOrderSummary(){
           const productId = link.dataset.productId;
           removeFromCart(productId)
 
-          // const  container = document.querySelector(
-          //   `.js-cart-item-container-${productId}`
-          // );
-          
-          // container.remove()
 
-          renderOrderSummary() // used MVC technique
+          renderOrderSummary() 
           renderPaymentSummary()
           renderCheckoutHeader()
           
@@ -152,17 +147,6 @@ export function renderOrderSummary(){
         })
       })
 
-
-  // function cartQuantityItem(){
-  //   let cartQuantity = 0
-  //   cart.forEach((CartItem)=>{
-  //     cartQuantity += CartItem.quantity
-  //   })
-      
-  //   document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} Items`
-  // }
-
-  // cartQuantityItem()
 
 
   document.querySelectorAll('.js-save-link')

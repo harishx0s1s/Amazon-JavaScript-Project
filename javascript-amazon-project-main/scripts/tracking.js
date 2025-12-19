@@ -72,7 +72,7 @@ async function loadPage(){
         </div>
 
         <div class="progress-bar-container">
-          <div class="progress-bar" style="width:${percentProgress + 10}%"></div>
+          <div class="progress-bar" style="width:${percentProgress}%"></div>
         </div>
       </div>
   `

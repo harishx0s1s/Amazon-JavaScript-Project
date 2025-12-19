@@ -13,17 +13,16 @@ export function getProduct(productId){
   return matchingProduct;
 }
 
-// defining class to create objects
 
 export class Product{
   id;
   image;
-  name;           // undefined variables
+  name;          
   rating;
   priceCents;
   keywords;
 
-  constructor(productDetails){          // constructor
+  constructor(productDetails){        
     this.id = productDetails.id
     this.image = productDetails.image
     this.name = productDetails.name
@@ -55,8 +54,6 @@ export class Clothing extends Product{
   }
 
   extraInfoHTML(){
-    // super function helps to reuse the parent class methods or property (method overiding)
-    //super.extraInfoHTML();
     return `<a href="${this.sizeChartLink}" target="_blank">Size Chart</a>`
   }
 }
@@ -76,27 +73,10 @@ export class Appliance extends Product{
   }
 }
 
-// const date = new Date();
-// console.log(date)
-// console.log(date.toLocaleDateString())
-
-// const object1 = {
-//   a:2,
-//   c:5
-// }
-
-// console.log(object1)
-
-// function logThis(a){
-//   console.log(this)
-// }
-
-// logThis.call('hii')
 
           
 export let products = []
 
-// fetch is an better aternative to XMLRequest (backend call)
 
 export function loadProductsFetch(){
   const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
@@ -120,63 +100,11 @@ export function loadProductsFetch(){
   return promise;
 }
 
-/*
-   // error handling in Promises we use catch method in promise in order of catch the error
-  let products1 = []
-  function loadProductsFetch1(){
-    const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
-      return response.json();
-    }).then((productsData)=>{
-      products1 = productsData.map((productDetails)=>{
-        if(productDetails.type === 'clothing'){
-          return new Clothing(productDetails)
-        } else if (productDetails.type === 'appliance'){
-            return new Appliance(productDetails)
-        } else {
-          return new Product(productDetails)
-        }
-      })
-      console.log("product class is cretaed!")
-    }).catch((error)=>{
-      console.log(`Unexpected Error: ${error}. Please try again later`)
-    })
-
-    return promise
-  }
-  */
-
- 
-
-/*
-
-export function loadCartFetch(){
-  fetch('https://supersimplebackend.dev/cart')
-  .then((response)=>{
-    console.log(`this is from backend1: ${response}`)
-  }).catch(()=>{
-    console.log("unexpected error: cant able to load cart")
-  })
-}
-  */
-
-/*
-loadProductsFetch().then(()=>{
-  console.log("products loaded using fetch")
-})
-*/
 
 
 
-/*
 
-loadProductsFetch().then(()=>{
-  console.log("Next step")
-})
-
-*/
-
-
-export function loadProducts(fun){     // callback function which is used to call a function in future
+export function loadProducts(fun){   
   const xhr = new XMLHttpRequest
   xhr.addEventListener('load',()=>{
     products = JSON.parse(xhr.response)
@@ -198,36 +126,6 @@ export function loadProducts(fun){     // callback function which is used to cal
 
 }
 
-// trying error handling
-/*
-let products1 = []
-function loadProducts2(fun){
-  const xhr = new XMLHttpRequest
-  xhr.addEventListener('load',()=>{
-    products1 = JSON.parse(xhr.response)
-    products1 = products.map((productDetails)=>{
-      if (productDetails.type === 'clothing'){
-        return new Clothing(productDetails)
-      } else if (productDetails.type === 'appliance'){
-         return new Appliance(productDetails)
-      } else {
-        return new Product(productDetails)
-      }
-    })
-    fun()
-    console.log('products loaded 2')
-  });
-
-  xhr.addEventListener('error', (error)=>{
-    console.log(`unexpected error: ${error}, Please try again later`)
-  });
-
-  xhr.open('GET','https://supersimplebackend.dev/products')
-  xhr.send()
-}
-
-loadProducts2(()=>{})
-  */
 
 
 let cartItems = []

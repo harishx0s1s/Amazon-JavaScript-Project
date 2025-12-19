@@ -8,30 +8,6 @@ describe('Test suite: renderOrderSummary',()=>{
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6'
   const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d'
 
-  // jasmine provide many hooks to write test cases more effiecent 
-  // beforeEach() - runs code before each test
-  // afterEach() - runs code after each test
-  // beforeAll() - runs code before all tests
-  // afterAll() - runs code after all tests
-
-  // these are the hooks function let as crete test in clea and easy way without duplicate codes 
-  /*
-  beforeAll((done)=>{
-    loadProducts(()=>{
-      done()
-    })
-  })
-    */
-
-  // using hook with call back done to make sure async code loaded first before running the cases
-  /*
-  beforeAll((done)=>{
-    loadProductsFetch().then(()=>{
-      done()
-    })
-  })
-    */
-
   beforeAll(async ()=>{
     await loadProductsFetch();
   })
@@ -40,7 +16,6 @@ describe('Test suite: renderOrderSummary',()=>{
   beforeEach(()=>{
     spyOn(localStorage, 'setItem')
 
-    // creating div continers in test file as same as og to match the result or render the result
     document.querySelector('.js-test-container').innerHTML = `
       <div class="js-order-summary"></div>
       <div class="js-payment-summary"></div>        
@@ -50,7 +25,7 @@ describe('Test suite: renderOrderSummary',()=>{
     spyOn(localStorage,'getItem').and.callFake(()=>{
       return JSON.stringify([
         {
-          productId: productId1,            // mocking the cart with fake product (make cart pretent to have some product)
+          productId: productId1,       
           quantity: 2,
           deliveryOptionId: '1'
         },{
