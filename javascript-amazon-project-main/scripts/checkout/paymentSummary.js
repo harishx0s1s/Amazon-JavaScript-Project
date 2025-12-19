@@ -105,6 +105,9 @@ export function renderPaymentSummary(){
 
         window.location.href = 'orders.html'
         
+        localStorage.removeItem('cart')
+        cart = []
+        
         
       })
 

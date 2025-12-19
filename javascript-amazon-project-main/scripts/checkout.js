@@ -3,7 +3,8 @@ import {renderPaymentSummary} from "./checkout/paymentSummary.js"
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js"
 import { loadProducts} from "../data/products.js"
 import { loadCart } from "../data/products.js"
-import { loadProductsFetch, loadCartFetch} from "../data/products.js"
+import { loadProductsFetch} from "../data/products.js"
+import { loadCartFetch } from "../data/cart.js"
 
 //import '../data/car.js'
 //import '../data/backend-practice.js'
@@ -202,19 +203,14 @@ loadPage().then((value)=>{
 
 // if you want to create an error in synchtronise code use throw
 // if you  want to create error in asynchronise code or create an error in future use reject inside promises
+/*
 async function loadPage(){
   try {
     //throw 'error111'    // throw keyword uded to throw an error voluntearly which skips all the line in try block and go into catch block
 
     await loadProductsFetch();
-
-    const value = await new Promise((resolve,reject)=>{
-      //throw 'error2'   // throw does not work in future instead we can give as second parameter with resolve
-      loadCart(()=>{
-        resolve()
-        //reject('error3')  // we can give reject inside promise to catch error in future
-      })
-    });
+      
+    await loadCartFetch();
 
   } catch(error) {
     console.log(`Unexpected error cant render checkout page Error: ${error}`)
@@ -226,6 +222,49 @@ async function loadPage(){
 }
 
 loadPage();
+
+*/
+
+async function loadPage(){
+  try{
+    await Promise.all([
+      loadProductsFetch(),
+      loadCartFetch()
+    ]);
+  } catch(error){
+    console.log('Unexpecte error. Please try again later')
+  }
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+  console.log('checkout page loaded')
+}
+
+loadPage()
+
+/*
+
+Promise.all([
+   new Promise((resolve)=>{
+    loadProductsFetch().then(()=>{
+      resolve('products loaed')
+    })
+  }),
+    new Promise((resolve)=>{
+      loadCartFetch().then(()=>{
+        resolve('cart loaded')
+      })
+    })
+]).then((value)=>{
+  console.log(value);
+
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+  
+})
+
+*/
 
 /*
 
@@ -253,3 +292,4 @@ Promise.all([
   renderCheckoutHeader()
 })
   */
+
