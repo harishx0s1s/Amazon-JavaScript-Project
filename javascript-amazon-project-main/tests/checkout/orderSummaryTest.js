@@ -23,10 +23,17 @@ describe('Test suite: renderOrderSummary',()=>{
   })
     */
 
+  // using hook with call back done to make sure async code loaded first before running the cases
+  /*
   beforeAll((done)=>{
     loadProductsFetch().then(()=>{
       done()
     })
+  })
+    */
+
+  beforeAll(async ()=>{
+    await loadProductsFetch();
   })
 
 
