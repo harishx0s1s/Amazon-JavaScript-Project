@@ -32,7 +32,28 @@ loadPage().then((value)=>{
 function renderProuctsGrid(){
   let productsHTML = '';                                // we are using acumalator pattern here its just creating a variable to store a value ffor later use after looping thr an array
 
-  products.forEach((product,index)=>{                    // we are loop thr an array by using forEach() so that we can get elements in array one by one medjing value with html 
+  
+  const url = new URL(window.location.href);
+  const search = url.searchParams.get('search')  // stores the value of parameter from url
+
+  let filteredProducts = products
+
+  if (search) {
+    filteredProducts = products.filter((product)=>{
+      let matchingKeyword = false;
+
+      product.keywords.forEach((keyword)=>{
+        if (keyword.toLowerCase().includes(search.toLowerCase())) {
+          matchingKeyword = true;
+        }
+      });
+
+      return matchingKeyword || product.name.toLowerCase().includes(search.toLowerCase());
+    })
+  }
+
+
+  filteredProducts.forEach((product,index)=>{                    // we are loop thr an array by using forEach() so that we can get elements in array one by one medjing value with html 
     productsHTML += `                                    
             <div class="product-container">
             <div class="product-image-container">
@@ -131,5 +152,22 @@ function renderProuctsGrid(){
     })
 
     updateCartQuantity()
+
+    document.querySelector('.js-search-button')
+      .addEventListener('click', ()=>{
+        const search = document.querySelector('.js-search-bar').value;
+
+        window.location.href = `amazon.html?search=${search}`
+      })
+
+    const input = document.querySelector('.js-search-bar');
+
+    input.addEventListener('keydown', (event)=>{
+      if (event.key === "Enter"){
+        const search = document.querySelector('.js-search-bar').value
+
+        window.location.href = `amazon.html?search=${search}`
+      }
+    })
 
 }

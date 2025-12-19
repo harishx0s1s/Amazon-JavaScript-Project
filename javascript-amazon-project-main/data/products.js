@@ -21,6 +21,7 @@ export class Product{
   name;           // undefined variables
   rating;
   priceCents;
+  keywords;
 
   constructor(productDetails){          // constructor
     this.id = productDetails.id
@@ -28,6 +29,8 @@ export class Product{
     this.name = productDetails.name
     this.rating = productDetails.rating
     this.priceCents = productDetails.priceCents
+    this.keywords = productDetails.keywords
+    
   }
 
   getStarsUrl(){
@@ -114,7 +117,7 @@ export function loadProductsFetch(){
     console.log("unexpected error in loading products. Please try agian later")
   })
 
-  return promise
+  return promise;
 }
 
 /*
@@ -144,7 +147,7 @@ export function loadProductsFetch(){
 
  
 
-
+/*
 
 export function loadCartFetch(){
   fetch('https://supersimplebackend.dev/cart')
@@ -154,6 +157,7 @@ export function loadCartFetch(){
     console.log("unexpected error: cant able to load cart")
   })
 }
+  */
 
 /*
 loadProductsFetch().then(()=>{
@@ -237,6 +241,10 @@ export function loadCart(fun){
   xhr.open('GET', 'https://supersimplebackend.dev/cart')
   xhr.send()
 }
+
+const xhr = new XMLHttpRequest
+xhr.open('GET', 'https://supersimplebackend.dev/products')
+xhr.send()
 
 
 
@@ -935,3 +943,4 @@ export const products = [
   return new Product(productDetails)
 });
 */
+
